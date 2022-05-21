@@ -23,17 +23,20 @@ CREATE TABLE `category` (
 );
 
 CREATE TABLE `comment` (
-	`cid`	cid	NOT NULL,
+	`cid`	varchar(12)	NOT NULL,
 	`uid`	varchar(12)	NOT NULL,
 	`nid`	int(8)	NOT NULL,
 	`content`	text	NOT NULL,
-	`pid`	cid	NULL
+	`pid`	varchar(12)	NULL
 );
 
 CREATE TABLE `user` (
 	`uid`	varchar(12)	NOT NULL,
-	`passwd`	varchar(128)	NOT NULL,
-	`salt`	varchar(10)	NOT NULL
+	`nickname`	varchar(32)	NOT NULL,
+	`permission`	int(1)	NOT NULL,
+	`email`	varchar(100)	NULL,
+	`profile`	longtext	NULL,
+	`createdAt`	timestamp	NOT NULL	DEFAULT current_timestamp
 );
 
 ALTER TABLE `post` ADD CONSTRAINT `PK_POST` PRIMARY KEY (
@@ -59,3 +62,5 @@ ALTER TABLE `comment` ADD CONSTRAINT `FK_user_TO_comment_1` FOREIGN KEY (
 REFERENCES `user` (
 	`uid`
 );
+
+
